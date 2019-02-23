@@ -25,22 +25,28 @@ for (var i=0; i < 4; i++){
     
             $(".crystals").append(crystal);
     }
+    $(".myScore").html("My Score:" + previous);
 };
 
 setupGame();
 
-$(".crystal").on('click', function(){
+
+//Event Deligation
+$(document).on('click', ".crystal", function(){
 
     var result;
 
     var num= parseInt($(this).attr('randomData'));
 
     previous+= num;
+
+    $(".myScore").html("My Score:" + previous);
     console.log(previous);
 
     if(previous > randomNumber){
         lost++;
         $(".losses").html(losses);
+        previous= 0;
         setupGame();
 
         console.log("You Lose!!")
@@ -48,6 +54,7 @@ $(".crystal").on('click', function(){
     else if(previous === randomNumber){
         win++;
         $(".win").html(wins);
+        previous= 0;
         setupGame();
         console.log("You Win!!")
     }
