@@ -5,7 +5,13 @@ var losses= 0;
 var previous= 0;
 
 var setupGame= function(){
-$(".crystals").empty();    
+$(".crystals").empty();   
+var images=[
+    'url("../images/soul.JPG")',
+    'url("../images/reality.JPG")',
+    'url("../images/space.JPG")',
+    'url("../images/time.JPG")'
+] 
 randomNumber = Math.floor(Math.random() * 69) + 30;
 console.log("Random Nummber:" + randomNumber);
 
@@ -22,6 +28,11 @@ for (var i=0; i < 4; i++){
          crystal.attr({
              "class": 'crystal',
             "randomData": randomCrystalValue});
+
+            crystal.css({
+                "background-image": "url('" + images[i] + "')",
+                "background-size": "cover"
+            });
     
             $(".crystals").append(crystal);
     }
@@ -45,7 +56,7 @@ $(document).on('click', ".crystal", function(){
 
     if(previous > randomNumber){
         lost++;
-        $(".losses").html(losses);
+        $(".losses").html("Losses:" + losses);
         previous= 0;
         setupGame();
 
@@ -53,7 +64,7 @@ $(document).on('click', ".crystal", function(){
     }
     else if(previous === randomNumber){
         win++;
-        $(".win").html(wins);
+        $(".win").html("Wins:" + wins);
         previous= 0;
         setupGame();
         console.log("You Win!!")
